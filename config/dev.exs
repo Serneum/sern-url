@@ -61,7 +61,8 @@ config :sern_url, SernUrlWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/sern_url_web/(live|views)/.*(ex)$",
-      ~r"lib/sern_url_web/templates/.*(eex)$"
+      ~r"lib/sern_url_web/templates/.*(eex)$",
+      ~r{lib/sern_url_web/templates/.*(eex|slim|slime)$}
     ]
   ]
 

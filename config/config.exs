@@ -18,6 +18,11 @@ config :sern_url, SernUrlWeb.Endpoint,
   pubsub_server: SernUrl.PubSub,
   live_view: [signing_salt: "Gb3HW+tw"]
 
+# Slime
+config :phoenix, :template_engines,
+  slim: PhoenixSlime.Engine,
+  slime: PhoenixSlime.Engine
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
