@@ -39,11 +39,14 @@ defmodule SernUrl.Urls do
       ** (Ecto.NoResultsError)
 
   """
-  def get_short_url!(lookup) do
+  def get_short_url!(lookup) when not is_nil(lookup) do
     ShortUrl
     |> where(hash: ^lookup)
     |> or_where(url: ^lookup)
     |> Repo.one!
+  end
+  def get_short_url!(_lookup) do
+    raise ArgumentError, message: "A lookup value must be provided."
   end
 
   @doc """
