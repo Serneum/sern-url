@@ -61,16 +61,16 @@ defmodule SernUrl.Urls do
   end
 
   @doc """
-  Creates an empty short_url changeset.
+  Returns an `%Ecto.Changeset{}` for tracking short_url changes.
 
   ## Examples
 
-      iex> short_url_changeset()
-      {:ok, %ShortUrl{}}
+      iex> change_short_url()
+      %Ecto.Changeset{data: %ShortUrl{}}
 
   """
-  def short_url_changeset() do
+  def change_short_url(attrs \\ %{}) do
     %ShortUrl{}
-    |> ShortUrl.changeset()
+    |> ShortUrl.changeset(attrs)
   end
 end

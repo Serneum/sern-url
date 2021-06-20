@@ -4,7 +4,7 @@ defmodule SernUrlWeb.PageController do
   alias SernUrl.Urls
 
   def index(conn, _params) do
-    changeset = Urls.short_url_changeset()
+    changeset = Urls.change_short_url()
     render(conn, "index.html", changeset: changeset)
   end
 end
