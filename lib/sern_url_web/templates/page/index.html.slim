@@ -1,12 +1,8 @@
-h1 Create an Account
+h1 Shorten a URL
 
 = form_for @changeset, Routes.short_url_path(@conn, :create), fn f ->
-  = if f.info != [] do
-    div.alert.alert-info
-      p Oops, something went wrong! Please check the errors below:
-
   div.form-group
-    = label(f, :url, name: "URL to Shorten", class: "control-label")
+    = label(f, :url, "URL to Shorten", class: "control-label")
     = text_input(f, :url, class: "form-control")
 
   div.form-group
