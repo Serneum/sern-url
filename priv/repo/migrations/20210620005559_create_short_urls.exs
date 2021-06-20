@@ -9,5 +9,6 @@ defmodule SernUrl.Repo.Migrations.CreateShortUrls do
       timestamps()
     end
 
+    create unique_index(:short_urls, [:url])
   end
 end

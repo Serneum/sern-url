@@ -7,10 +7,8 @@ defmodule SernUrlWeb.ShortUrlController do
   action_fallback SernUrlWeb.FallbackController
 
   def create(conn, %{"short_url" => short_url_params}) do
-    with {:ok, %ShortUrl{} = short_url} <- Urls.create_short_url(short_url_params) do
+    with {:ok, %ShortUrl{} = short_url} <- Urls.get_or_create_short_url(short_url_params) do
       conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.page_path(conn, :index))
       |> put_flash(:info, "Your shortened URL is #{SernUrlWeb.Router.Helpers.url(conn)}/#{short_url.hash}")
       |> redirect(to: Routes.page_path(conn, :index))
     end

@@ -14,6 +14,7 @@ defmodule SernUrl.Urls.ShortUrl do
     short_url
     |> cast(attrs, [:url])
     |> validate_required([:url])
+    |> unique_constraint(:url)
     |> hash_url
   end
 
