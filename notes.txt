@@ -1,8 +1,10 @@
-To set up the application:
+To pull down the Elixir dependencies, set up the Ecto database (with migrations!), and pull down any Node.js dependencies:
   make setup
 
 To run the server:
   make server
+
+Once the server is running, you can go to `http://localhost:4000`, at which point you should see a page with a single field for a URL. Entering in a URL and submitting the form should generate a shortened URL, and putting that shortened URL into your browser should take you to the original URL.
 
 To run the specs:
   make test
@@ -11,6 +13,8 @@ I did not implement any other commands or arguments for the existing commands.
 
 Notes:
 I opted to use an md5 hash for the shortened URL. I had considered using phrases or random strings but the md5 hash was the quickest to implement. It did, however, lead to some odd followup decisions, like needing to make URLs unique in the database. I figured the trade-off of shared shortened URLs across multiple users would be okay. A solution to this would be to have actual accounts, then the URLs could be unique per user.
+
+There are currently no guards in place to make sure that a URL is valid. For the most part, a simple implementation would just be to validate that a scheme exists and is http:// or https://, though that is likely a bit naive. Without the guards, it is possible to put any string into the URL field and generate a shortened URL, but the redirect will obviously fail if it is not an actual URL that was shortened. You can likely do some fun stuff, like redirect to a local file if the server is running on your machine and you use the file:// sheme.
 
 The specs are pretty basic. There's not a lot to test because the only model that exists only really cares about one field. Testing the Urls helper handles most of the verification that lookups and insertions are tested. I could test the function that handles the hashing, but since I am using built-in functionality (:crypto from Erland, Base64 from Elixir), I can safely assume those are tested and not reimplement those tests.
 
