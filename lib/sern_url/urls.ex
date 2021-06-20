@@ -14,14 +14,15 @@ defmodule SernUrl.Urls do
   # I could do away with this function if I made hashes unique, but the md5 was the first thing
   # that came to mind. Alternatives could be something like a random phrase or just a random
   # string
-  def get_or_create_short_url(attrs \\ %{}) do
-    attrs
-    # Do the create first, as we expect URLs to be unique more often
-    |> create_short_url()
-    |> case do
-      {:ok, short_url} -> short_url
-      {:error, _} -> get_short_url!(attrs.url)
-    end
+  def get_or_create_short_url!(attrs \\ %{}) do
+    short_url = attrs
+                # Do the create first, as we expect URLs to be unique more often
+                |> create_short_url()
+                |> case do
+                  {:ok, url} -> url
+                  {:error, _} -> get_short_url!(attrs["url"])
+                end
+    {:ok, short_url}
   end
 
   @doc """
