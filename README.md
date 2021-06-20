@@ -1,5 +1,11 @@
 # SernUrl
 
+## Notes
+
+I opted to use an md5 hash for the shortened URL. I had considered using phrases or random strings but the md5 hash was the quickest to implement. It did, however, lead to some odd followup decisions, like needing to make URLs unique in the database. I figured the trade-off of shared shortened URLs across multiple users would be okay. A solution to this would be to have actual accounts, then the URLs could be unique per user.
+
+## Run the server
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

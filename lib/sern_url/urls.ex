@@ -11,6 +11,9 @@ defmodule SernUrl.Urls do
   @doc """
   Create a new ShortUrl, or get an existing one if the URL has been used before.
   """
+  # I could do away with this function if I made hashes unique, but the md5 was the first thing
+  # that came to mind. Alternatives could be something like a random phrase or just a random
+  # string
   def get_or_create_short_url(attrs \\ %{}) do
     attrs
     |> create_short_url()

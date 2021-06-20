@@ -14,6 +14,8 @@ defmodule SernUrl.Urls.ShortUrl do
     short_url
     |> cast(attrs, [:url])
     |> validate_required([:url])
+    # Another alternative here is to make the hash unique instead, then do a loop
+    # whenever we have some sort of collision.
     |> unique_constraint(:url)
     |> hash_url
   end
