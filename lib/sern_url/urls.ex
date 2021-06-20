@@ -39,12 +39,10 @@ defmodule SernUrl.Urls do
 
   """
   def get_short_url!(lookup) do
-    # Do a lookup based on the hash first as that is the most common case
-    Repo.get_by!(ShortUrl, hash: lookup)
-    |> case do
-      {:ok, short_url} -> short_url
-      {:error, _} -> Repo.get_by!(ShortUrl, url: lookup)
-    end
+    ShortUrl
+    |> where(hash: ^lookup)
+    |> or_where(url: ^lookup)
+    |> Repo.one!
   end
 
   @doc """
