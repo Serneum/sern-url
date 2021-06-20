@@ -16,6 +16,7 @@ defmodule SernUrl.Urls do
   # string
   def get_or_create_short_url(attrs \\ %{}) do
     attrs
+    # Do the create first, as we expect URLs to be unique more often
     |> create_short_url()
     |> case do
       {:ok, short_url} -> short_url
@@ -26,7 +27,7 @@ defmodule SernUrl.Urls do
   @doc """
   Gets a single short_url.
 
-  Raises `Ecto.NoResultsError` if the Short url does not exist.
+  Raises `Ecto.NoResultsError` if the Short URL does not exist.
 
   ## Examples
 
@@ -38,6 +39,7 @@ defmodule SernUrl.Urls do
 
   """
   def get_short_url!(lookup) do
+    # Do a lookup based on the hash first as that is the most common case
     Repo.get_by!(ShortUrl, hash: lookup)
     |> case do
       {:ok, short_url} -> short_url
