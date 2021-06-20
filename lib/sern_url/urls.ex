@@ -9,19 +9,6 @@ defmodule SernUrl.Urls do
   alias SernUrl.Urls.ShortUrl
 
   @doc """
-  Returns the list of short_urls.
-
-  ## Examples
-
-      iex> list_short_urls()
-      [%ShortUrl{}, ...]
-
-  """
-  def list_short_urls do
-    Repo.all(ShortUrl)
-  end
-
-  @doc """
   Gets a single short_url.
 
   Raises `Ecto.NoResultsError` if the Short url does not exist.
@@ -35,7 +22,7 @@ defmodule SernUrl.Urls do
       ** (Ecto.NoResultsError)
 
   """
-  def get_short_url!(id), do: Repo.get!(ShortUrl, id)
+  def get_short_url!(hash), do: Repo.get_by!(ShortUrl, hash: hash)
 
   @doc """
   Creates a short_url.
@@ -56,49 +43,16 @@ defmodule SernUrl.Urls do
   end
 
   @doc """
-  Updates a short_url.
+  Creates an empty short_url changeset.
 
   ## Examples
 
-      iex> update_short_url(short_url, %{field: new_value})
+      iex> short_url_changeset()
       {:ok, %ShortUrl{}}
 
-      iex> update_short_url(short_url, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
-  def update_short_url(%ShortUrl{} = short_url, attrs) do
-    short_url
-    |> ShortUrl.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a short_url.
-
-  ## Examples
-
-      iex> delete_short_url(short_url)
-      {:ok, %ShortUrl{}}
-
-      iex> delete_short_url(short_url)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_short_url(%ShortUrl{} = short_url) do
-    Repo.delete(short_url)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking short_url changes.
-
-  ## Examples
-
-      iex> change_short_url(short_url)
-      %Ecto.Changeset{data: %ShortUrl{}}
-
-  """
-  def change_short_url(%ShortUrl{} = short_url, attrs \\ %{}) do
-    ShortUrl.changeset(short_url, attrs)
+  def short_url_changeset() do
+    %ShortUrl{}
+    |> ShortUrl.changeset()
   end
 end

@@ -17,6 +17,8 @@ defmodule SernUrlWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/:short_url", ShortUrlController, :show
+    post "/short_urls", ShortUrlController, :create
   end
 
   # Other scopes may use custom stacks.
