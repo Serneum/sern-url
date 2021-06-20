@@ -22,6 +22,8 @@ defmodule SernUrl.Urls.ShortUrl do
 
   @spec hash_url(%Ecto.Changeset{}) :: %Ecto.Changeset{}
   defp hash_url(%Ecto.Changeset{valid?: true, changes: %{url: url}} = changeset) when not is_nil(url) do
+    # This would be better as a random phrase, or maybe something clever like a string composed of
+    # the first three letters of five randomly generated words
     put_change(changeset, :hash, :crypto.hash(:md5, url) |> Base.url_encode64(padding: false))
   end
   defp hash_url(changeset), do: changeset
